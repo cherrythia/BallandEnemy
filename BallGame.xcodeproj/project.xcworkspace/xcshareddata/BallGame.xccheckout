@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>CEE94931-7CE6-4A57-A400-028B70087E1E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>project</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>74F87D882F192BE3C369626702D5EF9BFBFB008E</key>
+		<string>https://github.com/cherrythia/XcodeProtocolTutorial.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>iOS/BallGame/BallGame.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>74F87D882F192BE3C369626702D5EF9BFBFB008E</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/cherrythia/XcodeProtocolTutorial.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>74F87D882F192BE3C369626702D5EF9BFBFB008E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>74F87D882F192BE3C369626702D5EF9BFBFB008E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>github</string>
+		</dict>
+	</array>
+</dict>
+</plist>
