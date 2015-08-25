@@ -16,13 +16,11 @@
 
 @implementation ViewController
 
-#define MovingObjectRadius 21
+#define MovingObjectRadius 22
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
-//    [[NSBundle mainBundle]loadNibNamed:@"ViewController" owner:self options:nil];
     
     //(X Speed, Y Speed)
     pos = CGPointMake(5.0, 4.0);
@@ -33,11 +31,24 @@
 
 -(IBAction)start {
     [startButton setHidden:YES];
+    
     randomMain = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
     
+    addMoreBall = [NSTimer scheduledTimerWithTimeInterval:1.50 target:self selector:@selector(addMoreBall) userInfo:nil repeats:YES];
     
     [self startAcceleratorForPlayer];
     
+}
+
+-(void)addMoreBall {
+    
+    UIImageView *enemy2 = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
+    UIImage *image = [UIImage imageNamed:@"enemyball"];
+    enemy2.image = image;
+    
+    [self.view addSubview:enemy2];
+    
+    [enemyArray addObject:enemy2];
 }
 
 -(void)onTimer {
@@ -143,10 +154,10 @@
 }
 
 //detects the finger movement
-//-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-//    UITouch *myTouch = [[event allTouches]anyObject];
-//    player.center = [myTouch locationInView:self.view];
-//}
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+    UITouch *myTouch = [[event allTouches]anyObject];
+    player.center = [myTouch locationInView:self.view];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -17,6 +17,10 @@
     IBOutlet UIImageView *player;
     IBOutlet UIImageView *enemy;
     
+    NSTimer *addMoreBall;
+    
+    NSMutableArray *enemyArray;
+    
 }
 
 -(IBAction)start;
