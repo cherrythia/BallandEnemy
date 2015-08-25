@@ -16,8 +16,6 @@
 		14510F2F1B88450500C72DA1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14510F2D1B88450500C72DA1 /* LaunchScreen.xib */; };
 		14510F3B1B88450500C72DA1 /* BallGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14510F3A1B88450500C72DA1 /* BallGameTests.m */; };
 		14510F471B88498C00C72DA1 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14510F461B88498C00C72DA1 /* ViewController.xib */; };
-		14510F4B1B8850E600C72DA1 /* view2.m in Sources */ = {isa = PBXBuildFile; fileRef = 14510F491B8850E600C72DA1 /* view2.m */; };
-		14510F4C1B8850E600C72DA1 /* view2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14510F4A1B8850E600C72DA1 /* view2.xib */; };
 		14510F4F1B88709700C72DA1 /* AppLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 14510F4E1B88709700C72DA1 /* AppLogo.png */; };
 /* End PBXBuildFile section */
 
@@ -47,9 +45,6 @@
 		14510F391B88450500C72DA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14510F3A1B88450500C72DA1 /* BallGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BallGameTests.m; sourceTree = "<group>"; };
 		14510F461B88498C00C72DA1 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
-		14510F481B8850E600C72DA1 /* view2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = view2.h; sourceTree = "<group>"; };
-		14510F491B8850E600C72DA1 /* view2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = view2.m; sourceTree = "<group>"; };
-		14510F4A1B8850E600C72DA1 /* view2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = view2.xib; sourceTree = "<group>"; };
 		14510F4E1B88709700C72DA1 /* AppLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppLogo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,9 +71,6 @@
 			isa = PBXGroup;
 			children = (
 				14231D851B8C2F0B00F0B4E1 /* CoreMotion.framework */,
-				14510F481B8850E600C72DA1 /* view2.h */,
-				14510F491B8850E600C72DA1 /* view2.m */,
-				14510F4A1B8850E600C72DA1 /* view2.xib */,
 				14510F1A1B88450500C72DA1 /* BallGame */,
 				14510F371B88450500C72DA1 /* BallGameTests */,
 				14510F191B88450500C72DA1 /* Products */,
@@ -227,7 +219,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				14510F4F1B88709700C72DA1 /* AppLogo.png in Resources */,
-				14510F4C1B8850E600C72DA1 /* view2.xib in Resources */,
 				14510F2F1B88450500C72DA1 /* LaunchScreen.xib in Resources */,
 				14510F471B88498C00C72DA1 /* ViewController.xib in Resources */,
 				14510F2C1B88450500C72DA1 /* Images.xcassets in Resources */,
@@ -252,7 +243,6 @@
 				14510F241B88450500C72DA1 /* BallGame.xcdatamodeld in Sources */,
 				14510F271B88450500C72DA1 /* ViewController.m in Sources */,
 				14510F1E1B88450500C72DA1 /* main.m in Sources */,
-				14510F4B1B8850E600C72DA1 /* view2.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
