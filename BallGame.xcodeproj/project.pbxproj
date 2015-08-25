@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14231D861B8C2F0B00F0B4E1 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14231D851B8C2F0B00F0B4E1 /* CoreMotion.framework */; };
 		14510F1E1B88450500C72DA1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 14510F1D1B88450500C72DA1 /* main.m */; };
 		14510F211B88450500C72DA1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14510F201B88450500C72DA1 /* AppDelegate.m */; };
 		14510F241B88450500C72DA1 /* BallGame.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14510F221B88450500C72DA1 /* BallGame.xcdatamodeld */; };
 		14510F271B88450500C72DA1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14510F261B88450500C72DA1 /* ViewController.m */; };
-		14510F2A1B88450500C72DA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14510F281B88450500C72DA1 /* Main.storyboard */; };
 		14510F2C1B88450500C72DA1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14510F2B1B88450500C72DA1 /* Images.xcassets */; };
 		14510F2F1B88450500C72DA1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14510F2D1B88450500C72DA1 /* LaunchScreen.xib */; };
 		14510F3B1B88450500C72DA1 /* BallGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14510F3A1B88450500C72DA1 /* BallGameTests.m */; };
@@ -32,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		14231D851B8C2F0B00F0B4E1 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		14510F181B88450500C72DA1 /* BallGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BallGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14510F1C1B88450500C72DA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14510F1D1B88450500C72DA1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -40,7 +41,6 @@
 		14510F231B88450500C72DA1 /* BallGame.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BallGame.xcdatamodel; sourceTree = "<group>"; };
 		14510F251B88450500C72DA1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		14510F261B88450500C72DA1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		14510F291B88450500C72DA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		14510F2B1B88450500C72DA1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		14510F2E1B88450500C72DA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		14510F341B88450500C72DA1 /* BallGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BallGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14231D861B8C2F0B00F0B4E1 /* CoreMotion.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +75,7 @@
 		14510F0F1B88450500C72DA1 = {
 			isa = PBXGroup;
 			children = (
+				14231D851B8C2F0B00F0B4E1 /* CoreMotion.framework */,
 				14510F481B8850E600C72DA1 /* view2.h */,
 				14510F491B8850E600C72DA1 /* view2.m */,
 				14510F4A1B8850E600C72DA1 /* view2.xib */,
@@ -101,7 +103,6 @@
 				14510F251B88450500C72DA1 /* ViewController.h */,
 				14510F261B88450500C72DA1 /* ViewController.m */,
 				14510F461B88498C00C72DA1 /* ViewController.xib */,
-				14510F281B88450500C72DA1 /* Main.storyboard */,
 				14510F2B1B88450500C72DA1 /* Images.xcassets */,
 				14510F2D1B88450500C72DA1 /* LaunchScreen.xib */,
 				14510F221B88450500C72DA1 /* BallGame.xcdatamodeld */,
@@ -189,7 +190,7 @@
 		14510F101B88450500C72DA1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Terry Chia";
 				TargetAttributes = {
 					14510F171B88450500C72DA1 = {
@@ -225,7 +226,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14510F2A1B88450500C72DA1 /* Main.storyboard in Resources */,
 				14510F4F1B88709700C72DA1 /* AppLogo.png in Resources */,
 				14510F4C1B8850E600C72DA1 /* view2.xib in Resources */,
 				14510F2F1B88450500C72DA1 /* LaunchScreen.xib in Resources */,
@@ -275,14 +275,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		14510F281B88450500C72DA1 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				14510F291B88450500C72DA1 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		14510F2D1B88450500C72DA1 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -315,6 +307,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -380,6 +373,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BallGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Terry-Chia.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -390,6 +384,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BallGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Terry-Chia.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -408,6 +403,7 @@
 				);
 				INFOPLIST_FILE = BallGameTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Terry-Chia.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BallGame.app/BallGame";
 			};
@@ -423,6 +419,7 @@
 				);
 				INFOPLIST_FILE = BallGameTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Terry-Chia.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BallGame.app/BallGame";
 			};
@@ -447,6 +444,7 @@
 				14510F401B88450500C72DA1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		14510F411B88450500C72DA1 /* Build configuration list for PBXNativeTarget "BallGameTests" */ = {
 			isa = XCConfigurationList;
@@ -455,6 +453,7 @@
 				14510F431B88450500C72DA1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

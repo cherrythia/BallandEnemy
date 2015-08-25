@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "164041C19A20741F8AC1E832AF3C2C9F75384544",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "164041C19A20741F8AC1E832AF3C2C9F75384544" : 0,
+    "74F87D882F192BE3C369626702D5EF9BFBFB008E" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "CEE94931-7CE6-4A57-A400-028B70087E1E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "164041C19A20741F8AC1E832AF3C2C9F75384544" : "BallGame\/",
+    "74F87D882F192BE3C369626702D5EF9BFBFB008E" : ".."
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "BallGame",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "BallGame.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/cherrythia\/BallandEnemy.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "164041C19A20741F8AC1E832AF3C2C9F75384544"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/cherrythia\/XcodeProtocolTutorial.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "74F87D882F192BE3C369626702D5EF9BFBFB008E"
+    }
+  ]
+}

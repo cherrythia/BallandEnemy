@@ -9,28 +9,34 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-//@property (strong, nonatomic) IBOutlet UIView *view;
+
+@property (nonatomic, strong) CMMotionManager *motionManager;
 
 @end
 
 @implementation ViewController
 
-
+#define MovingObjectRadius 21
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    [[NSBundle mainBundle]loadNibNamed:@"ViewController" owner:self options:nil];
+//    [[NSBundle mainBundle]loadNibNamed:@"ViewController" owner:self options:nil];
     
     //(X Speed, Y Speed)
     pos = CGPointMake(5.0, 4.0);
-    
+
 }
+
+
 
 -(IBAction)start {
     [startButton setHidden:YES];
     randomMain = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
+    
+    
+    [self startAcceleratorForPlayer];
     
 }
 
@@ -74,16 +80,73 @@
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"You Lost" message:@"You are hit. Try Again!" delegate:self cancelButtonTitle:@"Dismiss!" otherButtonTitles:nil, nil];
         [alert show];
         
+        [self.motionManager stopAccelerometerUpdates];
 //        self.viewDidLoad;
         
     }
 }
 
-//detects the finger movement
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-    UITouch *myTouch = [[event allTouches]anyObject];
-    player.center = [myTouch locationInView:self.view];
+//starts the acceleration
+-(void)startAcceleratorForPlayer {
+    
+    //declare start of motion sensor
+    self.motionManager = [[CMMotionManager alloc]init];
+    
+    self.motionManager.accelerometerUpdateInterval = 1/60;
+    
+    if ([self.motionManager isAccelerometerAvailable]) {
+        
+        NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+        [self.motionManager startAccelerometerUpdatesToQueue:queue withHandler:^(CMAccelerometerData * accelerometerData, NSError * _Nullable error) {
+            
+            NSLog(@"X = %0.4f, Y = %.04f, Z = %0.4f",
+                  accelerometerData.acceleration.x,
+                  accelerometerData.acceleration.y,
+                  accelerometerData.acceleration.z);
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                //acceleration for player
+                float valueX = accelerometerData.acceleration.x * 40.0;
+                float valueY = accelerometerData.acceleration.y * 40.0;
+                
+                //create new integers
+                int intPlayerNewPosX = (int)(player.center.x + valueX);
+                int intPlayerNewPosY = (int)(player.center.y + valueY);
+                
+                //position validation
+                if (intPlayerNewPosX > (self.view.frame.size.width - MovingObjectRadius)) {
+                    intPlayerNewPosX = (self.view.frame.size.width - MovingObjectRadius);
+                }
+                
+                if (intPlayerNewPosX < (0 + MovingObjectRadius)) {
+                    intPlayerNewPosX = (0 + MovingObjectRadius);
+                }
+                
+                if (intPlayerNewPosY > (self.view.frame.size.width - MovingObjectRadius)) {
+                    intPlayerNewPosY = (self.view.frame.size.width - MovingObjectRadius);
+                }
+                
+                if (intPlayerNewPosY < (0 + MovingObjectRadius)) {
+                    intPlayerNewPosY = (0+ MovingObjectRadius);
+                }
+                
+                //Make new point
+                CGPoint playerNewPoint = CGPointMake(intPlayerNewPosX, intPlayerNewPosY);
+                player.center = playerNewPoint;
+                
+            });
+        }];
+    } else{
+        NSLog(@"Not Active.");
+    }
 }
+
+//detects the finger movement
+//-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+//    UITouch *myTouch = [[event allTouches]anyObject];
+//    player.center = [myTouch locationInView:self.view];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
