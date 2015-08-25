@@ -34,7 +34,7 @@
     
     randomMain = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
     
-    addMoreBall = [NSTimer scheduledTimerWithTimeInterval:1.50 target:self selector:@selector(addMoreBall) userInfo:nil repeats:YES];
+    addMoreBall = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(addMoreBall) userInfo:nil repeats:YES];
     
     [self startAcceleratorForPlayer];
     
@@ -48,22 +48,40 @@
     
     [self.view addSubview:enemy2];
     
-    [enemyArray addObject:enemy2];
+//    [enemyArray addObject:enemy2];
+    
 }
 
 -(void)onTimer {
     
     [self checkCollision];
+
+    NSArray *subviews = [self.view subviews];
     
-    enemy.center = CGPointMake(enemy.center.x + pos.x, enemy.center.y + pos.y);
-    
-    if (enemy.center.x > self.view.frame.size.width || enemy.center.x < 0) {
-        pos.x = -pos.x;
+    for (UIView *view in subviews) {
+        if ([view isKindOfClass: [UIImageView class]] && (view != player)) {
+            
+            NSLog(@"Is an UIImageView");
+            view.center = CGPointMake(view.center.x + pos.x, view.center.y + pos.y);
+            
+            if (view.center.x > self.view.frame.size.width || view.center.x < 0) {
+                pos.x = -pos.x;
+            }
+        
+            if (view.center.y > self.view.frame.size.height || view.center.y <0) {
+                pos.y = - pos.y;
+            }
+        }
     }
-    
-    if (enemy.center.y > self.view.frame.size.height || enemy.center.y <0) {
-        pos.y = - pos.y;
-    }
+//    enemy.center = CGPointMake(enemy.center.x + pos.x, enemy.center.y + pos.y);
+//    
+//    if (enemy.center.x > self.view.frame.size.width || enemy.center.x < 0) {
+//        pos.x = -pos.x;
+//    }
+//    
+//    if (enemy.center.y > self.view.frame.size.height || enemy.center.y <0) {
+//        pos.y = - pos.y;
+//    }
     
 }
 
