@@ -11,6 +11,8 @@
 @interface ViewController ()
 
 @property (nonatomic, strong) CMMotionManager *motionManager;
+@property (atomic, strong) UIImageView *player;
+@property (atomic, strong) UIImageView *enemy;
 
 @end
 
@@ -30,6 +32,7 @@
 
 
 -(IBAction)start {
+    
     [startButton setHidden:YES];
     
     randomMain = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
@@ -38,18 +41,20 @@
     
     [self startAcceleratorForPlayer];
     
+    //Add player ball
+    self.player = [[UIImageView alloc]initWithFrame:CGRectMake(self.view.center.x, self.view.center.y, 40, 40)];
+    UIImage *playerImage = [UIImage imageNamed:@"playerball"];
+    self.player.image = playerImage;
+    [self.view addSubview:self.player];
+    [self.view bringSubviewToFront:self.player];
 }
 
 -(void)addMoreBall {
     
-    UIImageView *enemy2 = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
+    self.enemy = [[UIImageView alloc]initWithFrame:CGRectMake(250, 250, 44, 44)];
     UIImage *image = [UIImage imageNamed:@"enemyball"];
-    enemy2.image = image;
-    
-    [self.view addSubview:enemy2];
-    
-//    [enemyArray addObject:enemy2];
-    
+    self.enemy.image = image;
+    [self.view addSubview:self.enemy];
 }
 
 -(void)onTimer {
@@ -59,10 +64,9 @@
     NSArray *subviews = [self.view subviews];
     
     for (UIView *view in subviews) {
-        if ([view isKindOfClass: [UIImageView class]] && (view != player)) {
+        if ([view isKindOfClass: [UIImageView class]] && (view != self.player)) {
             
-            NSLog(@"Is an UIImageView");
-            view.center = CGPointMake(view.center.x + pos.x, view.center.y + pos.y);
+            view.center = CGPointMake(view.center.x + pos.x, view.center.y + pos.y);        //enemyball movement
             
             if (view.center.x > self.view.frame.size.width || view.center.x < 0) {
                 pos.x = -pos.x;
@@ -73,45 +77,40 @@
             }
         }
     }
-//    enemy.center = CGPointMake(enemy.center.x + pos.x, enemy.center.y + pos.y);
-//    
-//    if (enemy.center.x > self.view.frame.size.width || enemy.center.x < 0) {
-//        pos.x = -pos.x;
-//    }
-//    
-//    if (enemy.center.y > self.view.frame.size.height || enemy.center.y <0) {
-//        pos.y = - pos.y;
-//    }
-    
 }
 
 -(void)checkCollision {
-    if (CGRectIntersectsRect(player.frame, enemy.frame)) {
+    
+    NSArray *subview = [self.view subviews];
+    
+    //check collision for all the enemy balls
+    for (UIView *viewInSub in subview) {
         
-        [randomMain invalidate];
-        [startButton setHidden:NO];
-        
-        CGRect playerFrame = [player frame];
-        playerFrame.origin.x = self.view.center.x;
-        playerFrame.origin.y = (3 * (self.view.frame.size.height /4)) ;
-        [player setFrame:playerFrame];
-        
-        CGRect enemyFrame = [enemy frame];
-        enemyFrame.origin.x = self.view.center.x ;
-        enemyFrame.origin.y = ((self.view.frame.size.height)/4);
-        [enemy setFrame: enemyFrame];
-        
-        CGRect startFrame = [startButton frame];
-        startFrame.origin.x = self.view.center.x;
-        startFrame.origin.y = self.view.frame.size.height/2;
-        [startButton setFrame:startFrame];
-        
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"You Lost" message:@"You are hit. Try Again!" delegate:self cancelButtonTitle:@"Dismiss!" otherButtonTitles:nil, nil];
-        [alert show];
-        
-        [self.motionManager stopAccelerometerUpdates];
-//        self.viewDidLoad;
-        
+        if ([viewInSub isKindOfClass:[UIImageView class]] && (viewInSub == self.enemy)) {
+            
+            if (CGRectIntersectsRect(self.player.frame, viewInSub.frame)) {                  //Perform these once player intersects with any enemy
+                
+                [randomMain invalidate];
+                [startButton setHidden:NO];
+                [self.motionManager stopAccelerometerUpdates];
+                [addMoreBall invalidate];
+                [self removeSubView];
+                
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"You Lost" message:@"You are hit. Try Again!" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil, nil];
+                [alert show];
+                
+            }
+        }
+    }
+}
+
+
+-(void)removeSubView {
+    NSArray *subViews = [self.view subviews];
+    for (UIView *view in subViews) {
+        if ([view isKindOfClass:[UIImageView class]]) { //remove enemy and player balls. Once start button is pressed, player ball will be added in.
+                [view removeFromSuperview];
+        }
     }
 }
 
@@ -140,8 +139,8 @@
                 float valueY = accelerometerData.acceleration.y * 40.0;
                 
                 //create new integers
-                int intPlayerNewPosX = (int)(player.center.x + valueX);
-                int intPlayerNewPosY = (int)(player.center.y + valueY);
+                int intPlayerNewPosX = (int)(self.player.center.x + valueX);
+                int intPlayerNewPosY = (int)(self.player.center.y + valueY);
                 
                 //position validation
                 if (intPlayerNewPosX > (self.view.frame.size.width - MovingObjectRadius)) {
@@ -162,7 +161,7 @@
                 
                 //Make new point
                 CGPoint playerNewPoint = CGPointMake(intPlayerNewPosX, intPlayerNewPosY);
-                player.center = playerNewPoint;
+                self.player.center = playerNewPoint;
                 
             });
         }];
@@ -174,7 +173,7 @@
 //detects the finger movement
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *myTouch = [[event allTouches]anyObject];
-    player.center = [myTouch locationInView:self.view];
+    self.player.center = [myTouch locationInView:self.view];
 }
 
 - (void)didReceiveMemoryWarning {

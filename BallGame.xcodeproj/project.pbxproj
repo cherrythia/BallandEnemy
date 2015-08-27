@@ -17,6 +17,7 @@
 		14510F3B1B88450500C72DA1 /* BallGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14510F3A1B88450500C72DA1 /* BallGameTests.m */; };
 		14510F471B88498C00C72DA1 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14510F461B88498C00C72DA1 /* ViewController.xib */; };
 		14510F4F1B88709700C72DA1 /* AppLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 14510F4E1B88709700C72DA1 /* AppLogo.png */; };
+		14CFDABC1B8EDDBF003293EB /* EnemyBall.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CFDABB1B8EDDBF003293EB /* EnemyBall.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,8 @@
 		14510F3A1B88450500C72DA1 /* BallGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BallGameTests.m; sourceTree = "<group>"; };
 		14510F461B88498C00C72DA1 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		14510F4E1B88709700C72DA1 /* AppLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppLogo.png; sourceTree = "<group>"; };
+		14CFDABA1B8EDDBF003293EB /* EnemyBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyBall.h; sourceTree = "<group>"; };
+		14CFDABB1B8EDDBF003293EB /* EnemyBall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyBall.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +98,8 @@
 				14510F251B88450500C72DA1 /* ViewController.h */,
 				14510F261B88450500C72DA1 /* ViewController.m */,
 				14510F461B88498C00C72DA1 /* ViewController.xib */,
+				14CFDABA1B8EDDBF003293EB /* EnemyBall.h */,
+				14CFDABB1B8EDDBF003293EB /* EnemyBall.m */,
 				14510F2B1B88450500C72DA1 /* Images.xcassets */,
 				14510F2D1B88450500C72DA1 /* LaunchScreen.xib */,
 				14510F221B88450500C72DA1 /* BallGame.xcdatamodeld */,
@@ -243,6 +248,7 @@
 				14510F241B88450500C72DA1 /* BallGame.xcdatamodeld in Sources */,
 				14510F271B88450500C72DA1 /* ViewController.m in Sources */,
 				14510F1E1B88450500C72DA1 /* main.m in Sources */,
+				14CFDABC1B8EDDBF003293EB /* EnemyBall.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
