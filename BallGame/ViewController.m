@@ -7,12 +7,12 @@
 //
 
 #import "ViewController.h"
+#import "EnemyBall.h"
 
 @interface ViewController ()
 
 @property (nonatomic, strong) CMMotionManager *motionManager;
 @property (atomic, strong) UIImageView *player;
-@property (atomic, strong) UIImageView *enemy;
 
 @end
 
@@ -26,7 +26,7 @@
     
     //(X Speed, Y Speed)
     pos = CGPointMake(5.0, 4.0);
-
+    
 }
 
 
@@ -37,7 +37,7 @@
     
     randomMain = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
     
-    addMoreBall = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(addMoreBall) userInfo:nil repeats:YES];
+    addMoreBall = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(addMoreBall) userInfo:nil repeats:YES];
     
     [self startAcceleratorForPlayer];
     
@@ -51,10 +51,8 @@
 
 -(void)addMoreBall {
     
-    self.enemy = [[UIImageView alloc]initWithFrame:CGRectMake(250, 250, 44, 44)];
-    UIImage *image = [UIImage imageNamed:@"enemyball"];
-    self.enemy.image = image;
-    [self.view addSubview:self.enemy];
+    EnemyBall *addmoreClass = [[EnemyBall alloc]init];
+    [self.view addSubview: addmoreClass.addEnemyBallFromClass];
 }
 
 -(void)onTimer {
@@ -86,7 +84,7 @@
     //check collision for all the enemy balls
     for (UIView *viewInSub in subview) {
         
-        if ([viewInSub isKindOfClass:[UIImageView class]] && (viewInSub == self.enemy)) {
+        if ([viewInSub isKindOfClass:[UIImageView class]] && (viewInSub != self.player)) {
             
             if (CGRectIntersectsRect(self.player.frame, viewInSub.frame)) {                  //Perform these once player intersects with any enemy
                 

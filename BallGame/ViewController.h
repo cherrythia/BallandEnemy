@@ -15,8 +15,6 @@
     NSTimer *randomMain;
     NSTimer *addMoreBall;
     CGPoint pos;
-
-    NSMutableArray *enemyArray;
 }
 
 -(IBAction)start;

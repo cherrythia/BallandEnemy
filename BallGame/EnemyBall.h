@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EnemyBall : UIImageView{
+@interface EnemyBall : UIImageView
 
-//@property()UIImageView *enemyRedBall
-}
+-(UIImageView *)addEnemyBallFromClass;
 
 @end
+
+
 

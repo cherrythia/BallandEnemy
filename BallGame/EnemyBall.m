@@ -18,8 +18,13 @@
 }
 */
 
--(void)addEnemyBallFromClass{
+-(UIImageView *)addEnemyBallFromClass{
     
+    UIImageView *enemyRedBall = [[UIImageView alloc]initWithFrame:CGRectMake(250, 250, 44, 44)];
+    UIImage *enemyImage = [UIImage imageNamed:@"enemyball"];
+    enemyRedBall.image = enemyImage;
+    
+    return enemyRedBall;
 }
 
 @end
