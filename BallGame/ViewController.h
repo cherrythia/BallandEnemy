@@ -13,10 +13,7 @@
 
     IBOutlet UIButton *startButton;
     NSTimer *randomMain;
-    CGPoint pos;
-    IBOutlet UIImageView *player;
-    IBOutlet UIImageView *enemy;
-    
+    NSTimer *addMoreBall;
 }
 
 -(IBAction)start;

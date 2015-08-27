@@ -7,82 +7,128 @@
 //
 
 #import "ViewController.h"
+#import "EnemyBall.h"
 
 @interface ViewController ()
 
 @property (nonatomic, strong) CMMotionManager *motionManager;
+@property (atomic, strong) UIImageView *player;
 
 @end
 
+NSMutableArray *speedArray;
+
 @implementation ViewController
 
-#define MovingObjectRadius 21
+#define MovingObjectRadius 22
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-//    [[NSBundle mainBundle]loadNibNamed:@"ViewController" owner:self options:nil];
-    
-    //(X Speed, Y Speed)
-    pos = CGPointMake(5.0, 4.0);
-
 }
 
 
 
 -(IBAction)start {
+    
     [startButton setHidden:YES];
+    
     randomMain = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
     
+    addMoreBall = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(addMoreBall) userInfo:nil repeats:YES];
     
     [self startAcceleratorForPlayer];
     
+    //Add player ball
+    self.player = [[UIImageView alloc]initWithFrame:CGRectMake(self.view.center.x, self.view.center.y, 40, 40)];
+    UIImage *playerImage = [UIImage imageNamed:@"playerball"];
+    self.player.image = playerImage;
+    [self.view addSubview:self.player];
+    [self.view bringSubviewToFront:self.player];
+    
+    speedArray = [[NSMutableArray alloc]init];
+}
+
+-(void)addMoreBall {
+    
+    EnemyBall *addmoreClass = [[EnemyBall alloc]init];
+    [self.view addSubview: addmoreClass.addEnemyBallFromClass];
+    CGPoint tempPos =  addmoreClass.enemyBallSpeed;
+    [speedArray addObject:[NSValue valueWithCGPoint:tempPos]];
+    NSLog(@"%@",NSStringFromCGPoint(tempPos));
+
 }
 
 -(void)onTimer {
     
     [self checkCollision];
+
+    NSArray *subviews = [self.view subviews];
+    NSUInteger index = 0;
+    NSUInteger count = 0;
     
-    enemy.center = CGPointMake(enemy.center.x + pos.x, enemy.center.y + pos.y);
-    
-    if (enemy.center.x > self.view.frame.size.width || enemy.center.x < 0) {
-        pos.x = -pos.x;
+    for (UIView *view in subviews) {
+        
+        if ([view isKindOfClass: [UIImageView class]] && (view != self.player)) {
+        
+            if (count == index) {
+                
+                CGPoint posistion = [speedArray[index] CGPointValue];
+                
+                view.center = CGPointMake(view.center.x + posistion.x, view.center.y + posistion.y);    //movement of the enemyball
+                
+                if (view.center.x > self.view.frame.size.width || view.center.x <0) {  //when it hits the boundary condtion. Enemyball will move negaitve value.
+                    
+                    CGPoint tempSpeed = CGPointMake(-posistion.x, posistion.y);
+                    [speedArray replaceObjectAtIndex:index withObject:[NSValue valueWithCGPoint:tempSpeed]];
+                }
+                
+                if (view.center.y > self.view.frame.size.height || view.center.y < 0) {
+                    
+                    CGPoint tempSpeed = CGPointMake(posistion.x, -posistion.y);
+                    [speedArray replaceObjectAtIndex:index withObject:[NSValue valueWithCGPoint:tempSpeed]];
+                }
+            }
+            
+            count++;
+            index++;
+        }
     }
-    
-    if (enemy.center.y > self.view.frame.size.height || enemy.center.y <0) {
-        pos.y = - pos.y;
-    }
-    
 }
 
 -(void)checkCollision {
-    if (CGRectIntersectsRect(player.frame, enemy.frame)) {
+    
+    NSArray *subview = [self.view subviews];
+    
+    //check collision for all the enemy balls
+    for (UIView *viewInSub in subview) {
         
-        [randomMain invalidate];
-        [startButton setHidden:NO];
-        
-        CGRect playerFrame = [player frame];
-        playerFrame.origin.x = self.view.center.x;
-        playerFrame.origin.y = (3 * (self.view.frame.size.height /4)) ;
-        [player setFrame:playerFrame];
-        
-        CGRect enemyFrame = [enemy frame];
-        enemyFrame.origin.x = self.view.center.x ;
-        enemyFrame.origin.y = ((self.view.frame.size.height)/4);
-        [enemy setFrame: enemyFrame];
-        
-        CGRect startFrame = [startButton frame];
-        startFrame.origin.x = self.view.center.x;
-        startFrame.origin.y = self.view.frame.size.height/2;
-        [startButton setFrame:startFrame];
-        
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"You Lost" message:@"You are hit. Try Again!" delegate:self cancelButtonTitle:@"Dismiss!" otherButtonTitles:nil, nil];
-        [alert show];
-        
-        [self.motionManager stopAccelerometerUpdates];
-//        self.viewDidLoad;
-        
+        if ([viewInSub isKindOfClass:[UIImageView class]] && (viewInSub != self.player)) {
+            
+            if (CGRectIntersectsRect(self.player.frame, viewInSub.frame)) {                  //Perform these once player intersects with any enemy
+                
+                [randomMain invalidate];
+                [startButton setHidden:NO];
+                [self.motionManager stopAccelerometerUpdates];
+                [addMoreBall invalidate];
+                [self removeSubView];
+                
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"You Lost" message:@"You are hit. Try Again!" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil, nil];
+                [alert show];
+                
+            }
+        }
+    }
+}
+
+
+-(void)removeSubView {
+    NSArray *subViews = [self.view subviews];
+    for (UIView *view in subViews) {
+        if ([view isKindOfClass:[UIImageView class]]) { //remove enemy and player balls. Once start button is pressed, player ball will be added in.
+                [view removeFromSuperview];
+        }
     }
 }
 
@@ -111,8 +157,8 @@
                 float valueY = accelerometerData.acceleration.y * 40.0;
                 
                 //create new integers
-                int intPlayerNewPosX = (int)(player.center.x + valueX);
-                int intPlayerNewPosY = (int)(player.center.y + valueY);
+                int intPlayerNewPosX = (int)(self.player.center.x + valueX);
+                int intPlayerNewPosY = (int)(self.player.center.y + valueY);
                 
                 //position validation
                 if (intPlayerNewPosX > (self.view.frame.size.width - MovingObjectRadius)) {
@@ -133,7 +179,7 @@
                 
                 //Make new point
                 CGPoint playerNewPoint = CGPointMake(intPlayerNewPosX, intPlayerNewPosY);
-                player.center = playerNewPoint;
+                self.player.center = playerNewPoint;
                 
             });
         }];
@@ -143,10 +189,10 @@
 }
 
 //detects the finger movement
-//-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-//    UITouch *myTouch = [[event allTouches]anyObject];
-//    player.center = [myTouch locationInView:self.view];
-//}
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+    UITouch *myTouch = [[event allTouches]anyObject];
+    self.player.center = [myTouch locationInView:self.view];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
