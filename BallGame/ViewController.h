@@ -14,7 +14,6 @@
     IBOutlet UIButton *startButton;
     NSTimer *randomMain;
     NSTimer *addMoreBall;
-    CGPoint pos;
 }
 
 -(IBAction)start;

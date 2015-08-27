@@ -11,6 +11,7 @@
 @interface EnemyBall : UIImageView
 
 -(UIImageView *)addEnemyBallFromClass;
+-(CGPoint )enemyBallSpeed;
 
 @end
 

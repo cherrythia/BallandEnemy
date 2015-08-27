@@ -16,6 +16,8 @@
 
 @end
 
+NSMutableArray *speedArray;
+
 @implementation ViewController
 
 #define MovingObjectRadius 22
@@ -23,9 +25,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
-    //(X Speed, Y Speed)
-    pos = CGPointMake(5.0, 4.0);
     
 }
 
@@ -37,7 +36,7 @@
     
     randomMain = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
     
-    addMoreBall = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(addMoreBall) userInfo:nil repeats:YES];
+    addMoreBall = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(addMoreBall) userInfo:nil repeats:YES];
     
     [self startAcceleratorForPlayer];
     
@@ -47,12 +46,18 @@
     self.player.image = playerImage;
     [self.view addSubview:self.player];
     [self.view bringSubviewToFront:self.player];
+    
+    speedArray = [[NSMutableArray alloc]init];
 }
 
 -(void)addMoreBall {
     
     EnemyBall *addmoreClass = [[EnemyBall alloc]init];
     [self.view addSubview: addmoreClass.addEnemyBallFromClass];
+    CGPoint tempPos =  addmoreClass.enemyBallSpeed;
+    [speedArray addObject:[NSValue valueWithCGPoint:tempPos]];
+    NSLog(@"%@",NSStringFromCGPoint(tempPos));
+
 }
 
 -(void)onTimer {
@@ -60,19 +65,34 @@
     [self checkCollision];
 
     NSArray *subviews = [self.view subviews];
+    NSUInteger index = 0;
+    NSUInteger count = 0;
     
     for (UIView *view in subviews) {
-        if ([view isKindOfClass: [UIImageView class]] && (view != self.player)) {
-            
-            view.center = CGPointMake(view.center.x + pos.x, view.center.y + pos.y);        //enemyball movement
-            
-            if (view.center.x > self.view.frame.size.width || view.center.x < 0) {
-                pos.x = -pos.x;
-            }
         
-            if (view.center.y > self.view.frame.size.height || view.center.y <0) {
-                pos.y = - pos.y;
+        if ([view isKindOfClass: [UIImageView class]] && (view != self.player)) {
+        
+            if (count == index) {
+                
+                CGPoint posistion = [speedArray[index] CGPointValue];
+                
+                view.center = CGPointMake(view.center.x + posistion.x, view.center.y + posistion.y);    //movement of the enemyball
+                
+                if (view.center.x > self.view.frame.size.width || view.center.x <0) {  //when it hits the boundary condtion. Enemyball will move negaitve value.
+                    
+                    CGPoint tempSpeed = CGPointMake(-posistion.x, posistion.y);
+                    [speedArray replaceObjectAtIndex:index withObject:[NSValue valueWithCGPoint:tempSpeed]];
+                }
+                
+                if (view.center.y > self.view.frame.size.height || view.center.y < 0) {
+                    
+                    CGPoint tempSpeed = CGPointMake(posistion.x, -posistion.y);
+                    [speedArray replaceObjectAtIndex:index withObject:[NSValue valueWithCGPoint:tempSpeed]];
+                }
             }
+            
+            count++;
+            index++;
         }
     }
 }
