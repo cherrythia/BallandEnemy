@@ -34,7 +34,7 @@ NSMutableArray *speedArray;
     
     [startButton setHidden:YES];
     
-    randomMain = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
+    randomMain = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
     
     addMoreBall = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(addMoreBall) userInfo:nil repeats:YES];
     
@@ -89,36 +89,37 @@ NSMutableArray *speedArray;
                     CGPoint tempSpeed = CGPointMake(posistion.x, -posistion.y);
                     [speedArray replaceObjectAtIndex:index withObject:[NSValue valueWithCGPoint:tempSpeed]];
                 }
-            index++;
-            NSLog(@"First view %lu",index);
-        }
         
-        NSUInteger indexAnotherView = 0;
-        for (NSUInteger num = 0; num<subviews.count; num++) {
-            
-            UIView *anotherView = subviews[num];
-            
-            if ([anotherView isKindOfClass:[UIImageView class]] && (anotherView != self.player) && (anotherView != view)) {
+            NSUInteger indexAnotherView = 0;
+            for (NSUInteger num = 0; num<subviews.count; num++) {
                 
-                if (CGRectIntersectsRect(anotherView.frame, view.frame)) { //checking the collision between enemyballs && condition to make sure they are not the same view
-                    NSLog(@"Enemy balls intersect");
-                    /********************Check how they intersect here**************************/
+                UIView *anotherView = subviews[num];
+                
+                if ([anotherView isKindOfClass:[UIImageView class]] && (anotherView != self.player) && (anotherView != view)) {
                     
-                    //deflection of anotherView
-                    CGPoint anotherViewPosition = [speedArray[indexAnotherView] CGPointValue];
-                    CGPoint tempAnotherViewSpeed = CGPointMake(-anotherViewPosition.x, -anotherViewPosition.y);
-                    [speedArray replaceObjectAtIndex:indexAnotherView withObject:[NSValue valueWithCGPoint:tempAnotherViewSpeed]];
-                    
-                    //deflecton of view
-                    CGPoint posistion = [speedArray[index] CGPointValue];                 //something wrong with this index
-                    CGPoint tempViewSpeed = CGPointMake(-posistion.x, -posistion.y);
-                    [speedArray replaceObjectAtIndex:index withObject:[NSValue valueWithCGPoint:tempViewSpeed]];
+                    if (CGRectIntersectsRect(anotherView.frame, view.frame)) { //checking the collision between enemyballs && condition to make sure they are not the same view
+                        NSLog(@"Enemy balls intersect");
+                        /********************Check how they intersect here**************************/
+                        
+                        //deflection of anotherView
+                        CGPoint anotherViewPosition = [speedArray[indexAnotherView] CGPointValue];
+                        CGPoint tempAnotherViewSpeed = CGPointMake(-anotherViewPosition.x, -anotherViewPosition.y);
+                        [speedArray replaceObjectAtIndex:indexAnotherView withObject:[NSValue valueWithCGPoint:tempAnotherViewSpeed]];
+                        
+                        //deflecton of view
+                        CGPoint posistion = [speedArray[index] CGPointValue];                 //something wrong with this index
+                        CGPoint tempViewSpeed = CGPointMake(-posistion.x, -posistion.y);
+                        [speedArray replaceObjectAtIndex:index withObject:[NSValue valueWithCGPoint:tempViewSpeed]];
+                    }
+                    indexAnotherView++;
+                    NSLog(@"Second view %lu",indexAnotherView);
                 }
-                indexAnotherView++;
-                NSLog(@"Second view %lu",indexAnotherView);
             }
+        
+        index++;
+        NSLog(@"First View %lu", index);
         }
-    } 
+    }
 }
 
 -(void)checkCollision {
