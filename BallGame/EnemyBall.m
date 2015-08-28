@@ -20,11 +20,19 @@
 
 -(UIImageView *)addEnemyBallFromClass{
     
-    UIImageView *enemyRedBall = [[UIImageView alloc]initWithFrame:CGRectMake(250, 250, 44, 44)];
-    UIImage *enemyImage = [UIImage imageNamed:@"enemyball"];
-    enemyRedBall.image = enemyImage;
+    int randomBool = rand()%2;
     
-    return enemyRedBall;
+    if ((BOOL)randomBool) {
+        UIImageView *enemyRedBall = [[UIImageView alloc]initWithFrame:CGRectMake(rand()%300 , 0, 44, 44)];
+        UIImage *enemyImage = [UIImage imageNamed:@"enemyball"];
+        enemyRedBall.image = enemyImage;
+        return enemyRedBall;
+    }else{
+        UIImageView *enemyRedBall = [[UIImageView alloc]initWithFrame:CGRectMake(0, rand()%300, 44, 44)];
+        UIImage *enemyImage = [UIImage imageNamed:@"enemyball"];
+        enemyRedBall.image = enemyImage;
+        return enemyRedBall;
+    }
 }
 
 -(CGPoint)enemyBallSpeed {
