@@ -153,6 +153,7 @@ NSMutableArray *speedArray;
     }
 }
 
+
 //starts the acceleration
 -(void)startAcceleratorForPlayer {
     
