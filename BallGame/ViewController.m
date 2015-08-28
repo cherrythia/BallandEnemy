@@ -25,7 +25,7 @@ NSMutableArray *speedArray;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
+
 }
 
 
@@ -67,7 +67,6 @@ NSMutableArray *speedArray;
     NSArray *subviews = [self.view subviews];
     
     NSUInteger index = 0;
-    NSLog(@"Restart! Index back to zero.");
     for (NSUInteger count=0; count <subviews.count; count++) {
         
         UIView *view = subviews[count];
@@ -98,7 +97,6 @@ NSMutableArray *speedArray;
                 if ([anotherView isKindOfClass:[UIImageView class]] && (anotherView != self.player) && (anotherView != view)) {
                     
                     if (CGRectIntersectsRect(anotherView.frame, view.frame)) { //checking the collision between enemyballs && condition to make sure they are not the same view
-                        NSLog(@"Enemy balls intersect");
                         /********************Check how they intersect here**************************/
                         
                         //deflection of anotherView
@@ -112,12 +110,10 @@ NSMutableArray *speedArray;
                         [speedArray replaceObjectAtIndex:index withObject:[NSValue valueWithCGPoint:tempViewSpeed]];
                     }
                     indexAnotherView++;
-                    NSLog(@"Second view %lu",indexAnotherView);
                 }
             }
         
         index++;
-        NSLog(@"First View %lu", index);
         }
     }
 }
