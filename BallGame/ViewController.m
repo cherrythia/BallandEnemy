@@ -34,7 +34,7 @@ NSMutableArray *speedArray;
     
     [startButton setHidden:YES];
     
-    randomMain = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
+    randomMain = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
     
     addMoreBall = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(addMoreBall) userInfo:nil repeats:YES];
     
@@ -65,17 +65,17 @@ NSMutableArray *speedArray;
     [self checkCollision];
 
     NSArray *subviews = [self.view subviews];
-    NSUInteger index = 0;
-    NSUInteger count = 0;
     
-    for (UIView *view in subviews) {
+    NSUInteger index = 0;
+    NSLog(@"Restart! Index back to zero.");
+    for (NSUInteger count=0; count <subviews.count; count++) {
         
+        UIView *view = subviews[count];
+
         if ([view isKindOfClass: [UIImageView class]] && (view != self.player)) {
-        
-            if (count == index) {
-                
+            
                 CGPoint posistion = [speedArray[index] CGPointValue];
-                
+            
                 view.center = CGPointMake(view.center.x + posistion.x, view.center.y + posistion.y);    //movement of the enemyball
                 
                 if (view.center.x > self.view.frame.size.width || view.center.x <0) {  //when it hits the boundary condtion. Enemyball will move negaitve value.
@@ -89,12 +89,36 @@ NSMutableArray *speedArray;
                     CGPoint tempSpeed = CGPointMake(posistion.x, -posistion.y);
                     [speedArray replaceObjectAtIndex:index withObject:[NSValue valueWithCGPoint:tempSpeed]];
                 }
-            }
-            
-            count++;
             index++;
+            NSLog(@"First view %lu",index);
         }
-    }
+        
+        NSUInteger indexAnotherView = 0;
+        for (NSUInteger num = 0; num<subviews.count; num++) {
+            
+            UIView *anotherView = subviews[num];
+            
+            if ([anotherView isKindOfClass:[UIImageView class]] && (anotherView != self.player) && (anotherView != view)) {
+                
+                if (CGRectIntersectsRect(anotherView.frame, view.frame)) { //checking the collision between enemyballs && condition to make sure they are not the same view
+                    NSLog(@"Enemy balls intersect");
+                    /********************Check how they intersect here**************************/
+                    
+                    //deflection of anotherView
+                    CGPoint anotherViewPosition = [speedArray[indexAnotherView] CGPointValue];
+                    CGPoint tempAnotherViewSpeed = CGPointMake(-anotherViewPosition.x, -anotherViewPosition.y);
+                    [speedArray replaceObjectAtIndex:indexAnotherView withObject:[NSValue valueWithCGPoint:tempAnotherViewSpeed]];
+                    
+                    //deflecton of view
+                    CGPoint posistion = [speedArray[index] CGPointValue];                 //something wrong with this index
+                    CGPoint tempViewSpeed = CGPointMake(-posistion.x, -posistion.y);
+                    [speedArray replaceObjectAtIndex:index withObject:[NSValue valueWithCGPoint:tempViewSpeed]];
+                }
+                indexAnotherView++;
+                NSLog(@"Second view %lu",indexAnotherView);
+            }
+        }
+    } 
 }
 
 -(void)checkCollision {
