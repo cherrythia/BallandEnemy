@@ -190,8 +190,8 @@ NSMutableArray *speedArray;
                     intPlayerNewPosX = (0 + MovingObjectRadius);
                 }
                 
-                if (intPlayerNewPosY > (self.view.frame.size.width - MovingObjectRadius)) {
-                    intPlayerNewPosY = (self.view.frame.size.width - MovingObjectRadius);
+                if (intPlayerNewPosY > (self.view.frame.size.height - MovingObjectRadius)) {
+                    intPlayerNewPosY = (self.view.frame.size.height - MovingObjectRadius);
                 }
                 
                 if (intPlayerNewPosY < (0 + MovingObjectRadius)) {
