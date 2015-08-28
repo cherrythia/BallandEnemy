@@ -160,7 +160,7 @@ NSMutableArray *speedArray;
     //declare start of motion sensor
     self.motionManager = [[CMMotionManager alloc]init];
     
-    self.motionManager.accelerometerUpdateInterval = 1/60;
+    self.motionManager.accelerometerUpdateInterval = 0.01;
     
     if ([self.motionManager isAccelerometerAvailable]) {
         
@@ -175,8 +175,8 @@ NSMutableArray *speedArray;
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 //acceleration for player
-                float valueX = accelerometerData.acceleration.x * 40.0;
-                float valueY = accelerometerData.acceleration.y * 40.0;
+                float valueX = accelerometerData.acceleration.x * 30.0;
+                float valueY = accelerometerData.acceleration.y * 30.0;
                 
                 //create new integers
                 int intPlayerNewPosX = (int)(self.player.center.x + valueX);
