@@ -9,11 +9,18 @@
 #import <UIKit/UIKit.h>
 #import <CoreMotion/CoreMotion.h>
 
+
+
 @interface ViewController : UIViewController {
 
     IBOutlet UIButton *startButton;
     NSTimer *randomMain;
     NSTimer *addMoreBall;
+    IBOutlet UILabel *highScoreLabel;
+    IBOutlet UILabel *highScore;
+    NSInteger highScoreNumber;
+    int scoreNumber;
+    long highestScoreNumber;
 }
 
 -(IBAction)start;

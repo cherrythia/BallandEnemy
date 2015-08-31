@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		141020551B93DC4E00C737A9 /* BallGame.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14510F221B88450500C72DA1 /* BallGame.xcdatamodeld */; };
 		14231D861B8C2F0B00F0B4E1 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14231D851B8C2F0B00F0B4E1 /* CoreMotion.framework */; };
 		14510F1E1B88450500C72DA1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 14510F1D1B88450500C72DA1 /* main.m */; };
 		14510F211B88450500C72DA1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14510F201B88450500C72DA1 /* AppDelegate.m */; };
-		14510F241B88450500C72DA1 /* BallGame.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14510F221B88450500C72DA1 /* BallGame.xcdatamodeld */; };
 		14510F271B88450500C72DA1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14510F261B88450500C72DA1 /* ViewController.m */; };
 		14510F2C1B88450500C72DA1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14510F2B1B88450500C72DA1 /* Images.xcassets */; };
 		14510F2F1B88450500C72DA1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14510F2D1B88450500C72DA1 /* LaunchScreen.xib */; };
@@ -244,8 +244,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				141020551B93DC4E00C737A9 /* BallGame.xcdatamodeld in Sources */,
 				14510F211B88450500C72DA1 /* AppDelegate.m in Sources */,
-				14510F241B88450500C72DA1 /* BallGame.xcdatamodeld in Sources */,
 				14510F271B88450500C72DA1 /* ViewController.m in Sources */,
 				14510F1E1B88450500C72DA1 /* main.m in Sources */,
 				14CFDABC1B8EDDBF003293EB /* EnemyBall.m in Sources */,

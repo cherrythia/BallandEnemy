@@ -25,14 +25,18 @@ NSMutableArray *speedArray;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    highScoreNumber = [[NSUserDefaults standardUserDefaults]integerForKey:@"highScoreSaved"];
 
 }
-
-
 
 -(IBAction)start {
     
     [startButton setHidden:YES];
+    [highScore setHidden:YES];
+    [highScoreLabel setHidden:YES];
+    
+    scoreNumber = 0;
     
     randomMain = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
     
@@ -57,6 +61,8 @@ NSMutableArray *speedArray;
     CGPoint tempPos =  addmoreClass.enemyBallSpeed;
     [speedArray addObject:[NSValue valueWithCGPoint:tempPos]];
     NSLog(@"%@",NSStringFromCGPoint(tempPos));
+    
+    scoreNumber++;
 
 }
 
@@ -131,16 +137,42 @@ NSMutableArray *speedArray;
                 
                 [randomMain invalidate];
                 [startButton setHidden:NO];
+                [highScoreLabel setHidden:NO];
+                [highScore setHidden:NO];
                 [self.motionManager stopAccelerometerUpdates];
                 [addMoreBall invalidate];
                 [self removeSubView];
                 
+                //Display ScoreNumber first
+                [highScoreLabel setText:[NSString stringWithFormat:@"Score"]];
+                [highScore setText:[NSString stringWithFormat:@"%d",scoreNumber]];
+                
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"You Lost" message:@"You are hit. Try Again!" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil, nil];
                 [alert show];
+                
                 
             }
         }
     }
+}
+
+
+//This isn't working.
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 0) {
+        NSLog(@"This is performed");
+        [highScoreLabel setText:[NSString stringWithFormat:@"High Score"]];
+        
+        //display the highscore values
+        if (scoreNumber > highScoreNumber) {
+            [[NSUserDefaults standardUserDefaults]setInteger:scoreNumber forKey:@"highScoreSaved"];
+        }
+        
+        highestScoreNumber = [[NSUserDefaults standardUserDefaults] integerForKey:@"highScoreSaved"];
+        [highScore setText: [NSString stringWithFormat:@"%li",(long)highestScoreNumber]];
+    }
+    
 }
 
 
@@ -180,7 +212,7 @@ NSMutableArray *speedArray;
                 
                 //create new integers
                 int intPlayerNewPosX = (int)(self.player.center.x + valueX);
-                int intPlayerNewPosY = (int)(self.player.center.y + valueY);
+                int intPlayerNewPosY = (int)(self.player.center.y - valueY);
                 
                 //position validation
                 if (intPlayerNewPosX > (self.view.frame.size.width - MovingObjectRadius)) {
