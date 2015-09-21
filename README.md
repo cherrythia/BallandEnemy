@@ -11,4 +11,5 @@ To make the HighScore Appear.
 Thinking to add different level of difficulties into the game. So every 15 secs time interval, it restarts a new level.
 
 1) Either add more ball in a quicker time.
+
 2) Increase the speed of the ball. 
