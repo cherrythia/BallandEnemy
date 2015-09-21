@@ -186,7 +186,7 @@ NSMutableArray *speedArray;
 }
 
 
-//starts the acceleration
+//start the acceleration
 -(void)startAcceleratorForPlayer {
     
     //declare start of motion sensor
